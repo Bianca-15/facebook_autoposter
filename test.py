@@ -7,15 +7,22 @@ from urllib.parse import urlparse
 import sys
 from selenium.webdriver.chrome.options import Options
 
+option = Options()
+
+option.add_argument("--disable-infobars")
+option.add_argument("start-maximized")
+option.add_argument("--disable-extensions")
+
+# Pass the argument 1 to allow and 2 to block
+option.add_experimental_option("prefs", { 
+    "profile.default_content_setting_values.notifications": 1 
+})
+
 # setting general password
 passwordStr = 'prueba12'
- 
-# disabling chrome extensions
-chrome_options = webdriver.ChromeOptions()
-chrome_options.add_experimental_option('useAutomationExtension', False)
 
 # opening chrome instance
-browser = webdriver.Chrome(chrome_options=chrome_options)
+browser = webdriver.Chrome(chrome_options=option)
 
 # opening IDP in chrome
 browser.get(('https://www.facebook.com/'))
